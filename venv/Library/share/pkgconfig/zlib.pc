@@ -1,0 +1,13 @@
+prefix=E:/PycharmProjects/Job-Application-Bot/venv/Library
+exec_prefix=E:/PycharmProjects/Job-Application-Bot/venv/Library
+libdir=E:/PycharmProjects/Job-Application-Bot/venv/Library/lib
+sharedlibdir=E:/PycharmProjects/Job-Application-Bot/venv/Library/lib
+includedir=E:/PycharmProjects/Job-Application-Bot/venv/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.11
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
