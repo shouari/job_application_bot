@@ -5,6 +5,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 import json
+from tkinter import *
+from gui import Window
+
+root = Tk ()
+app = Window (root)
+root.mainloop ()
 
 with open('credential.json') as f:
     credential = json.loads(f.read())

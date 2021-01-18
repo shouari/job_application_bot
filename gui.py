@@ -30,7 +30,10 @@ class Window(Frame):
 
 
         submitButton = Button (self, text="Submit", command=self.get_credential)
-        submitButton.grid(column=2, row=1)
+        submitButton.grid(column=2, row=0)
+
+        exitButton = Button (self, text="Exit", command=self.exit_window)
+        exitButton.grid (column=2, row=1)
 
 
     def get_credential(self):
@@ -38,13 +41,10 @@ class Window(Frame):
         with open ('credential.json', 'w') as fp:
             json.dump (credential, fp)
 
+    def exit_window(self):
+        pass
 
-root = Tk ()
 
-# size of the window
-
-app = Window (root)
-root.mainloop ()
 
 
 
