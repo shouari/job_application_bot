@@ -1,4 +1,5 @@
 from tkinter import *
+import json
 
 class Window(Frame):
     
@@ -6,46 +7,44 @@ class Window(Frame):
         Frame.__init__(self, master)
         self.init_window()
         self.master = master
+        self.master.minsize (400, 400)
 
         # Creation of init_window
     def init_window(self):
         # changing the title of our master widget
         self.master.title ("Job Application Bot")
+        #
+        self.pack(fill= Y,side=LEFT)
 
-        # allowing the widget to take the full space of the root window
-        self.pack (fill=BOTH, expand=1)
+        usernameLable = Label(self, text='Username',padx=5)
+        usernameLable.grid(column=0, row=0)
 
-        menu = Menu(self.master)
-        self.master.config(menu=menu)
+        passwordLable = Label (self, text='Password', padx=5)
+        passwordLable.grid (column=0, row=1)
 
-        file= Menu(menu)
-        # adds a command to the menu option, calling it exit, and the
-        # command it runs on event is client_exit
-        file.add_command (label="Exit")
+        self.usernameEntry = Entry(self, width= 30)
+        self.usernameEntry.grid(column=1, row =0, padx=10)
 
-        # added "file" to our menu
-        menu.add_cascade (label="File", menu=file)
+        self.passwordEntry = Entry (self, width=30)
+        self.passwordEntry.grid (column=1, row=1, padx=10)
 
-        # create the file object)
-        edit = Menu (menu)
 
-        # adds a command to the menu option, calling it exit, and the
-        # command it runs on event is client_exit
-        edit.add_command (label="Undo")
+        submitButton = Button (self, text="Submit", command=self.get_credential)
+        submitButton.grid(column=2, row=1)
 
-        # added "file" to our menu
-        menu.add_cascade (label="Edit", menu=edit)
 
-        # creating a button instance
-        quitButton = Button (self, text="Quit")
+    def get_credential(self):
+        credential ={"username": self.usernameEntry.get(), "password":self.passwordEntry.get()}
+        with open ('credential.json', 'w') as fp:
+            json.dump (credential, fp)
 
-        # placing the button on my window
-        quitButton.place (x=0, y=0)
 
 root = Tk ()
 
 # size of the window
-root.geometry ("400x300")
+
 app = Window (root)
 root.mainloop ()
+
+
 
