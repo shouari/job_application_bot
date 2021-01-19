@@ -29,8 +29,8 @@ class Window(Frame):
 
         job_positionLable = Label(self, text='Job Position', padx=5)
         job_positionLable.grid(column=0, row=2)
-        self.job_postion = Entry(self, width=30)
-        self.job_postion.grid(column=1, row=2, padx=10)
+        self.job_title = Entry(self, width=30)
+        self.job_title.grid(column=1, row=2, padx=10)
 
         cityLable = Label(self, text='City', padx=5)
         cityLable.grid(column=0, row=3)
@@ -53,7 +53,7 @@ class Window(Frame):
     def get_data(self):
         data ={"username": self.usernameEntry.get(),
                "password":self.passwordEntry.get(),
-               "job_position": self.job_postion.get(),
+               "job_title": self.job_title.get(),
                "city": self.city.get(),
                "country": self.country.get()
                }
@@ -62,7 +62,16 @@ class Window(Frame):
 
 
     def exit_window(self):
-        pass
+       pass
+
+class Page1(Frame):
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
+        self.master = master
+        self.master.minsize(400, 400)
+        self.master.title("PAge 2")
+        #
+        self.pack(fill=Y, side=LEFT)
 
 root = Tk ()
 app = Window (root)
