@@ -71,6 +71,7 @@ def load_page(sleep=1):
     return page
 
 load_page(sleep=1)
+
 links = browser.find_elements_by_xpath('//div[@data-job-id]')
 # get job ID of each job link
 IDs = []
