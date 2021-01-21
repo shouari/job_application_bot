@@ -57,8 +57,55 @@ time.sleep(2)
 
 job_locationElem = browser.find_element_by_xpath("//input[starts-with(@id, 'jobs-search-box-location-id')]")
 job_locationElem.send_keys(city + ',' + country + Keys.TAB + Keys.ENTER)
-URL= browser.current_url
-page = requests.get(URL)
-soup = BeautifulSoup(page.content, 'html.parser')
-print(soup.find_all(class_="mr1"))
+# URL= browser.current_url
+# page = requests.get(URL)
+# soup = BeautifulSoup(page.content, 'html.parser')
+# print(soup.find_all(class_="mr1"))
+# get job links
+links = browser.find_elements_by_xpath('//div[@data-job-id]')
+# get job ID of each job link
+IDs = []
+for link in links:
+    children = link.find_elements_by_xpath(
+        './/a[@data-control-name]'
+        )
+    for child in children:
+        temp = link.get_attribute("data-job-id")
+        jobID = temp.split(":")[-1]
+        IDs.append(int(jobID))
+IDs = set(IDs)
 
+print(IDs)
+
+# def get_easy_apply_button():
+#     try :
+#         button = browser.find_elements_by_xpath(
+#                     '//button[contains(@class, "jobs-apply")]/span[1]'
+#                     )
+#
+#         EasyApplyButton = button [0]
+#     except :
+#         EasyApplyButton = False
+#
+#     return EasyApplyButton
+#
+# def get_job_page( jobID):
+#
+#     job = 'https://www.linkedin.com/jobs/view/'+ str(jobID)
+#     browser.get(job)
+#     job_page = load_page(sleep=0.5)
+#     return job_page
+#
+# def load_page(sleep=1):
+#     scroll_page = 0
+#     while scroll_page < 4000:
+#         browser.execute_script("window.scrollTo(0,"+str(scroll_page)+" );")
+#         scroll_page += 200
+#         time.sleep(sleep)
+#
+#     if sleep != 1:
+#         browser.execute_script("window.scrollTo(0,0);")
+#         time.sleep(sleep * 3)
+#
+#     page = BeautifulSoup(browser.page_source, "lxml")
+#     return page
