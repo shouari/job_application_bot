@@ -55,6 +55,23 @@ time.sleep(2)
 job_locationElem = browser.find_element_by_xpath("//input[starts-with(@id, 'jobs-search-box-location-id')]")
 job_locationElem.send_keys(city + ',' + country + Keys.TAB + Keys.ENTER)
 
+# button = browser.find_elements_by_xpath('//button[contains(@label, "LinkedIn Features")]')
+# button.click()
+
+# def get_easy_apply_button():
+#     try :
+#         button = browser.find_elements_by_xpath(
+#                     '//button[contains(@label, "LinkedIn Features")]/span[1]'
+#                     )
+#         button.click()
+#
+#         EasyApplyButton = button [0]
+#     except :
+#         EasyApplyButton = False
+#
+#     return EasyApplyButton
+#
+# get_easy_apply_button()
 # get job links
 def load_page(sleep=1):
     scroll_page = 0
@@ -88,23 +105,13 @@ IDs = set(IDs)
 print(IDs)
 
 
-# def get_easy_apply_button():
-#     try :
-#         button = browser.find_elements_by_xpath(
-#                     '//button[contains(@class, "jobs-apply")]/span[1]'
-#                     )
-#
-#         EasyApplyButton = button [0]
-#     except :
-#         EasyApplyButton = False
-#
-#     return EasyApplyButton
-#
-# def get_job_page( jobID):
-#
-#     job = 'https://www.linkedin.com/jobs/view/'+ str(jobID)
-#     browser.get(job)
-#     job_page = load_page(sleep=0.5)
-#     return job_page
-#
+
+
+def get_job_page( jobID):
+
+    job = 'https://www.linkedin.com/jobs/view/'+ str(jobID)
+    browser.get(job)
+    job_page = load_page(sleep=0.5)
+    return job_page
+
 
