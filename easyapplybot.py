@@ -55,24 +55,28 @@ time.sleep(2)
 job_locationElem = browser.find_element_by_xpath("//input[starts-with(@id, 'jobs-search-box-location-id')]")
 job_locationElem.send_keys(city + ',' + country + Keys.TAB + Keys.ENTER)
 
-# button = browser.find_elements_by_xpath('//button[contains(@label, "LinkedIn Features")]')
-# button.click()
 
-# def get_easy_apply_button():
-#     try :
-#         button = browser.find_elements_by_xpath(
-#                     '//button[contains(@label, "LinkedIn Features")]/span[1]'
-#                     )
-#         button.click()
-#
-#         EasyApplyButton = button [0]
-#     except :
-#         EasyApplyButton = False
-#
-#     return EasyApplyButton
-#
-# get_easy_apply_button()
-# get job links
+def get_easy_apply_button():
+    try :
+        button = browser.find_elements_by_xpath(
+                    '//button[contains(@label, "LinkedIn Features")]/span[1]'
+                    )
+        button.click()
+
+        EasyApplyButton = button [0]
+    except :
+        EasyApplyButton = False
+
+    return EasyApplyButton
+
+def get_job_page( jobID):
+
+    job = 'https://www.linkedin.com/jobs/view/'+ str(jobID)
+    browser.get(job)
+    job_page = load_page(sleep=0.5)
+    return job_page
+
+
 def load_page(sleep=1):
     scroll_page = 0
     while scroll_page < 4000:
@@ -92,6 +96,7 @@ load_page(sleep=1)
 links = browser.find_elements_by_xpath('//div[@data-job-id]')
 # get job ID of each job link
 IDs = []
+
 for link in links:
     children = link.find_elements_by_xpath(
         './/a[@data-control-name]'
@@ -103,15 +108,20 @@ for link in links:
 IDs = set(IDs)
 
 print(IDs)
+count_job=0
+for i, jobID in enumerate(IDs):
+    count_job +=1
+    button = get_easy_apply_button()
+    if button is not False:
+        string_easy = "has Easy Apply "
+        print(jobID, string_easy)
+    else:
+        string_easy="Does not have easy apply"
+        print(jobID, string_easy)
 
 
 
 
-def get_job_page( jobID):
 
-    job = 'https://www.linkedin.com/jobs/view/'+ str(jobID)
-    browser.get(job)
-    job_page = load_page(sleep=0.5)
-    return job_page
 
 
